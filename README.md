@@ -19,7 +19,79 @@ STEP-4: Arrange the characters of the keyword in sorted order and the correspond
 STEP-5: Read the characters row wise or column wise in the former order to get the cipher text.
 
 # PROGRAM
+```
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+char text[1000];
+char rail[100][1000];
+int depth, i, j, dir, row, len;
+
+
+printf("Enter the plaintext: ");
+fgets(text, sizeof(text), stdin);
+
+len = strlen(text);
+
+if (len > 0 && text[len - 1] == '\n')
+    text[--len] = '\0';
+
+printf("Enter the number of rails: ");
+scanf("%d", &depth);
+
+if (depth < 1 || depth > 100)
+{
+    printf("Invalid number of rails!\n");
+    return 1;
+}
+
+for (i = 0; i < depth; i++)
+{
+    for (j = 0; j < len; j++)
+    {
+        rail[i][j] = '\0';
+    }
+}
+
+row = 0;
+dir = 1;
+
+for (i = 0; i < len; i++)
+{
+    rail[row][i] = text[i];
+
+    if (row == 0)
+        dir = 1;
+    else if (row == depth - 1)
+        dir = -1;
+
+    row += dir;
+}
+
+printf("Encrypted Text: ");
+
+for (i = 0; i < depth; i++)
+{
+    for (j = 0; j < len; j++)
+    {
+        if (rail[i][j] != '\0')
+            printf("%c", rail[i][j]);
+    }
+}
+
+printf("\n");
+
+return 0;
+
+
+}
+
+```
 
 # OUTPUT
+<img width="425" height="162" alt="image" src="https://github.com/user-attachments/assets/e66af506-6b54-4c28-857d-05d01e596924" />
 
 # RESULT
+Thus the above program is executed and the output is verified
